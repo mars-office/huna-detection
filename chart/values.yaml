@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/mars-office/template-deployable
+  repository: ghcr.io/mars-office/huna-detection
   pullPolicy: IfNotPresent
   tag: ""
 
@@ -31,7 +31,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  containerPort: 3000
+  containerPort: 3004
   exposedPort: 80
 
 ingress:
@@ -39,7 +39,7 @@ ingress:
   className: ""
   annotations: {}
   hosts:
-    - host: template-deployable.local.marsconceptor.com
+    - host: huna-detection.local.marsconceptor.com
       paths:
         - path: /
           pathType: ImplementationSpecific

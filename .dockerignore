@@ -4,9 +4,10 @@
 ### Git ###
 # Created by git for backups. To disable backups in Git:
 # $ git config --global mergetool.keepBackup false
-Dockerfile
 *.orig
 .gitignore
+coverage
+Dockerfile
 .git
 .github/
 # Created by git when using merge tools for conflicts
@@ -23,6 +24,7 @@ intercept.sh
 stop.sh
 chart/
 .vscode/
+.env
 ### Linux ###
 *~
 # Created by https://www.toptal.com/developers/gitignore/api/node
@@ -148,7 +150,7 @@ dist
 
 # TernJS port file
 .tern-port
-.env
+
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
