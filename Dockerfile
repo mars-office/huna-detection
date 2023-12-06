@@ -8,9 +8,6 @@ RUN npm run build
 ARG TARGETPLATFORM
 RUN [ "$TARGETPLATFORM" = "linux/amd64" ] && npm run test || echo "Skipping tests on ARM64"
 
-ARG DEPLOYABLE_VERSION
-ENV DEPLOYABLE_VERSION=${DEPLOYABLE_VERSION}
-
 CMD npm run prod
 
 EXPOSE 3004
