@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM --platform=linux/amd64 node:alpine as builder
 WORKDIR /app
 COPY ./package.json ./package.json
 COPY ./package-lock.json ./package-lock.json
@@ -10,6 +10,11 @@ RUN npm run build
 ARG TARGETPLATFORM
 RUN [ "$TARGETPLATFORM" = "linux/amd64" ] && npm run test || echo "Skipping tests on ARM64"
 
+FROM node:alpine as runner
+COPY --from=builder /app/dist /app
+COPY --from=builder /app/package.json /app/package.json
+COPY --from=builder /app/node_modules /app/node_modules
+WORKDIR /app
 CMD npm run prod
 
 EXPOSE 3004
