@@ -13,6 +13,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
       method: req.method.toUpperCase(),
       service: "huna-detection",
       remoteAddress: req.ip,
+      type: 'mtls'
     },
   };
   const response = await axios.post(
