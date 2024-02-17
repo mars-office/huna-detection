@@ -3,8 +3,8 @@ import express, { Application } from "express";
 import morgan from "morgan";
 import opaAuthzMiddleware from "./middlewares/opa-authz.middleware";
 import globalErrorHandlerMiddleware from "./middlewares/global-error-handler.middleware";
-import testRouter from "./routes/test.route";
 import healthCheckRouter from "./routes/health-check.route";
+import detectRouter from './routes/detect-route';
 
 
 const env = process.env.NODE_ENV || "local";
@@ -19,7 +19,9 @@ app.use(healthCheckRouter);
 
 // Secure routes
 app.use(opaAuthzMiddleware);
-app.use(testRouter);
+
+
+app.use(detectRouter);
 
 // Error handler, should always be LAST use()
 app.use(globalErrorHandlerMiddleware);
