@@ -1,6 +1,7 @@
 import { Request, Response, Router } from "express";
 import { gridFsBucket } from "../services/mongodb.service";
 import {v4} from 'uuid';
+import { mqttClient } from "../services/mqtt.service";
 
 const detectRouter = Router();
 
@@ -11,7 +12,9 @@ detectRouter.post("/api/detection/detect", (req: Request, res: Response) => {
     metadata: {
       parkingLotId,
       type: 'jpg',
-      createdAt: now
+      createdAt: now,
+      width: req.query["width"] ? +req.query["width"] : 320,
+      height: req.query["height"] ? +req.query["height"] : 240,
     }
   });
   writeStream.on('error', (e) => {
@@ -21,7 +24,9 @@ detectRouter.post("/api/detection/detect", (req: Request, res: Response) => {
   });
   writeStream.on('close', () => {
     res.send({success: true, _id: writeStream.id});
-    
+    mqttClient.publish('processing', writeStream.id.toString(), {
+      qos: 0
+    });
   });
   req.pipe(writeStream);
 });
