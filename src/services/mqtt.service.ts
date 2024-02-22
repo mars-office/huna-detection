@@ -25,6 +25,10 @@ mqttClient.on("connect", () => {
 
 mqttClient.on("reconnect", () => {
   console.log("MQTT reconnected");
+
+  mqttClient.subscribe("$share/main/processing", {
+    qos: 0
+  });
 });
 
 mqttClient.on("disconnect", () => {
