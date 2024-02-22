@@ -15,6 +15,7 @@ export const detectionService = {
     
     const buffers: Buffer[] = [];
     readStream.on('error', e => {
+      gridFsBucket.delete(new ObjectId(fileId));
       console.error(e);
     });
     readStream.on('data', b => {
@@ -22,6 +23,7 @@ export const detectionService = {
     });
     readStream.on('end', () => {
       (async () => {
+        gridFsBucket.delete(new ObjectId(fileId));
         const mergedBuffers = Buffer.concat(buffers);
         const jpegBuffer = await imageService.convertRGB565BufferToJpegBuffer(mergedBuffers, width, height);
         console.log(jpegBuffer); //TODO
