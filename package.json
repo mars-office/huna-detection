@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@opentelemetry/auto-instrumentations-node": "^0.41.0",
-    "@opentelemetry/instrumentation-grpc": "^0.48.0",
+    "@opentelemetry/instrumentation-grpc": "^0.49.1",
     "axios": "^1.6.7",
     "express": "^4.18.2",
     "mongodb": "^6.3.0",
